@@ -7,13 +7,13 @@ Inserta un jugador en orangutan Clan
 #### Request body
 ```json
 {
-        name: 'playername',
-        surname: 'playersurname',
-        nickname: 'nickname',
-        stats: [{
-        totalpoints: req.body.totalpoints,
-        gamesplayed: req.body.gamesplayed,
-        threes: req.body.threes
+        "name": "playername",
+        "surname": "playersurname",
+        "nickname": "nickname",
+        "stats: [{
+        "totalpoints": 50,
+        "gamesplayed": 3,
+        "threes": 10
     }]
 }
 ```
@@ -24,8 +24,8 @@ Modifica la linea estadistica de un jugador teniendo cuenta contraseña
 #### REQUEST BODY
 ```json
 {
-        totalpoints: 'totalpoints',
-        threes: 3,
-        gamesplayed: 5
+        "totalpoints": "totalpoints",
+        "threes": 3,
+        "gamesplayed": 5
 }
 ```
