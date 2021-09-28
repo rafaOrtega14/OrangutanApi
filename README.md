@@ -10,7 +10,7 @@ Inserta un jugador en orangutan Clan
         "name": "playername",
         "surname": "playersurname",
         "nickname": "nickname",
-        "stats: [{
+        "stats": [{
         "totalpoints": 50,
         "gamesplayed": 3,
         "threes": 10
