@@ -29,3 +29,15 @@ Modifica la linea estadistica de un jugador teniendo cuenta contraseña
         "gamesplayed": 5
 }
 ```
+### POST CALENDAR/ 
+Inserta un partido en el calendario
+#### Request body
+```json
+{
+        "rival": "notiganprisa",
+        "date": "2011-10-10T14:48:00",
+        "court": "pista 2",
+}
+```
+### GET CALENDAR/ 
+Obtiene todos los partidos del calendario
