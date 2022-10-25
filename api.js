@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+require('dotenv').config()
 const mongoose = require('mongoose');
-const config = require('./config.json');
 const cors = require('cors');
 const playersProvider = require('./providers/players');
 const competitionProvider = require('./providers/competitions');
@@ -19,6 +19,6 @@ app.get('/players', playersProvider.getPlayers);
 app.delete('/player/:id', playersProvider.deletePlayer);
 app.put('/player/:id', playersProvider.updateStastics);
 
-mongoose.connect(``,
+mongoose.connect(process.env.MONGO_URI,
     { useNewUrlParser: true });
 app.listen(process.env.PORT || 5000, () => { console.log('Server listening on port 3000') });
