@@ -9,6 +9,8 @@ async function insertPlayer(req, res) {
     }]
     const newPlayer = new playerSchema({
         name: req.body.playername,
+        dorsal: req.body.dorsal,
+        position: req.body.position,
         surname: req.body.playersurname,
         nickname: req.body.nickname,
         stats: stats
@@ -16,7 +18,22 @@ async function insertPlayer(req, res) {
     res.send(await newPlayer.save());
 }
 async function getPlayers(req, res) {
-    const players = await playerSchema.find();
+    const players = await playerSchema.aggregate([
+        {$match: {
+            disabled: false
+        }},
+        { 
+            $project: {
+        stats: { $arrayElemAt: [ "$stats", 1 ] },
+        name: 1,
+        surname: 1,
+        photo: 1,
+        nickname: 1,
+        disabled: 1,
+        position: 1,
+        dorsal: 1,
+    }}
+    ]);
     res.send(players);
 }
 async function deletePlayer(req, res) {
@@ -28,14 +45,14 @@ async function deletePlayer(req, res) {
 async function updateStastics(req, res) {
     try {
         const query = {
-            "stats._id": mongoose.Types.ObjectId(req.params.id)
+            "_id": mongoose.Types.ObjectId(req.params.id)
         }
         const updateRes = await playerSchema.updateOne(query, {
             $set:
                 {
-                    "stats.$.totalpoints": req.body.totalpoints,
-                    "stats.$.gamesplayed": req.body.gamesplayed,
-                    "stats.$.threes": req.body.threes
+                    "stats.1.totalpoints": req.body.totalpoints,
+                    "stats.1.gamesplayed": req.body.gamesplayed,
+                    "stats.1.threes": req.body.threes
                 }
         });
         res.send(updateRes);
